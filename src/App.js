@@ -6,7 +6,7 @@ import { WINNING_COMBINATIONS } from "./WinningCombinations.jsx";
 import { useState } from "react";
 
 const PLAYERS = {
-  X: "Player",
+  X: "Player1",
   O: "Player2",
 };
 
@@ -43,9 +43,9 @@ function deriveWinner(gameBoard, players) {
   let winner;
 
   for (const combination of WINNING_COMBINATIONS) {
-    firstSquareSymbol = gameBoard[combination[0].row][combination[0].column];
-    secondSquareSymbol = gameBoard[combination[1].row][combination[1].column];
-    thirdSquareSymbol = gameBoard[combination[2].row][combination[2].column];
+    const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol = gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbol = gameBoard[combination[2].row][combination[2].column];
 
     if (
       firstSquareSymbol &&
@@ -58,13 +58,14 @@ function deriveWinner(gameBoard, players) {
   return winner;
 }
 
+
 function App() {
   const [players, setPlayers] = useState(PLAYERS);
   const [gameTurns, setGameTurns] = useState([]);
 
   const activePlayer = deriveActivePlayer(gameTurns);
   const gameBoard = deriveGameBoard(gameTurns);
-  const winner = deriveWinner(gameBoard, players);
+  const winner =  deriveWinner(gameBoard, players);
   const isDraw = gameTurns.length === 9 && !winner;
 
   function handleSelectSquare(rowIndex, colIndex) {
